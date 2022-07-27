@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Mapa/TRÁVA.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Mapa/HLÍNA.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Mapa/KÁMEN.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Mapa/NAKŘÁPLÝ-KÁMEN.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Mapa/LÁVA.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Mapa/TRAMPOLÍNA.png" type="Texture" id=6]
+
+[node name="tileset" type="Node2D"]
+
+[node name="Tráva" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Tráva"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tráva/StaticBody2D"]
+polygon = PoolVector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+
+[node name="Hlína" type="Sprite" parent="."]
+position = Vector2( 64, 0 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Hlína"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hlína/StaticBody2D"]
+visible = false
+polygon = PoolVector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+
+[node name="Kámen" type="Sprite" parent="."]
+position = Vector2( 128, 0 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Kámen"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Kámen/StaticBody2D"]
+visible = false
+polygon = PoolVector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+
+[node name="Nakřáplý Kámen" type="Sprite" parent="."]
+position = Vector2( 192, 0 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Nakřáplý Kámen"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Nakřáplý Kámen/StaticBody2D"]
+visible = false
+polygon = PoolVector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+
+[node name="Láva" type="Sprite" parent="."]
+position = Vector2( 192, 0 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Láva"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Láva/StaticBody2D"]
+polygon = PoolVector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+
+[node name="Trampolína" type="Sprite" parent="."]
+position = Vector2( 256, 0 )
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}

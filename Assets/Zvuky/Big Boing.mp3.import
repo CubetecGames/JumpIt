@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Big Boing.mp3-c5f22e35041d8aad67735ee9720fb631.mp3str"
+
+[deps]
+
+source_file="res://Assets/Zvuky/Big Boing.mp3"
+dest_files=[ "res://.import/Big Boing.mp3-c5f22e35041d8aad67735ee9720fb631.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Disconnect.mp3-aa5435fc6dbfc3c6446c969734bd08ae.mp3str"
+
+[deps]
+
+source_file="res://Assets/Zvuky/Disconnect.mp3"
+dest_files=[ "res://.import/Disconnect.mp3-aa5435fc6dbfc3c6446c969734bd08ae.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

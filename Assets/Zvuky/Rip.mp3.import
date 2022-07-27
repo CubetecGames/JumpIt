@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Rip.mp3-d6572007763b357dbc43aa61ad6bd907.mp3str"
+
+[deps]
+
+source_file="res://Assets/Zvuky/Rip.mp3"
+dest_files=[ "res://.import/Rip.mp3-d6572007763b357dbc43aa61ad6bd907.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

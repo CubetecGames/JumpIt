@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Basketball Bounce.mp3-a42bc9454d51f7f09a1d5d330e078387.mp3str"
+
+[deps]
+
+source_file="res://Assets/Zvuky/Basketball Bounce.mp3"
+dest_files=[ "res://.import/Basketball Bounce.mp3-a42bc9454d51f7f09a1d5d330e078387.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

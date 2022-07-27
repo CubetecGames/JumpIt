@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Trampolína.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Mapa/TRAMPOLÍNA.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Zvuky/Big Boing.mp3" type="AudioStream" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 33, 33 )
+
+[node name="Trampolína" type="Sprite"]
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Oblast" type="Area2D" parent="."]
+
+[node name="Hitbox" type="CollisionShape2D" parent="Oblast"]
+shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[connection signal="body_entered" from="Oblast" to="." method="_on_Oblast_body_entered"]
+[connection signal="body_exited" from="Oblast" to="." method="_on_Oblast_body_exited"]

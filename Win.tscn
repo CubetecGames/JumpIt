@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/static/RobotoSlab-Black.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 200
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+font_data = ExtResource( 1 )
+
+[node name="Win" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 1055, -15, -100, -8, -108, 622, 1054, 619 )
+
+[node name="You win" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 1025.0
+margin_bottom = 601.0
+custom_fonts/font = SubResource( 1 )
+text = "You did it!"
+align = 1
+valign = 1
