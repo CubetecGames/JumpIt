@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Mapa/MAPASVĚTA.tres" type="TileSet" id=1]
 [ext_resource path="res://Assets/static/RobotoSlab-Regular.ttf" type="DynamicFontData" id=2]
@@ -8,6 +8,12 @@
 [ext_resource path="res://Kamera.gd" type="Script" id=6]
 [ext_resource path="res://CameraFilter.gd" type="Script" id=7]
 [ext_resource path="res://WinKostka.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Buttons/Left.svg" type="Texture" id=9]
+[ext_resource path="res://Assets/Buttons/Right.svg" type="Texture" id=10]
+[ext_resource path="res://Assets/Buttons/Up.svg" type="Texture" id=11]
+[ext_resource path="res://TSbuttonJump.gd" type="Script" id=12]
+[ext_resource path="res://CheckpointMapa.gd" type="Script" id=13]
+[ext_resource path="res://Assets/Mapa/CHECKMAPA.tres" type="TileSet" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -25,29 +31,6 @@ extents = Vector2( 192, 448 )
 extents = Vector2( 817.75, 1624 )
 
 [node name="Svět" type="Node2D"]
-
-[node name="Hráč" type="KinematicBody2D" parent="."]
-position = Vector2( 120, 192 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Obrázek" type="Polygon2D" parent="Hráč"]
-color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( -32, -32, -32, 32, 32, 32, 32, -32 )
-
-[node name="Hitbox" type="CollisionPolygon2D" parent="Hráč"]
-polygon = PoolVector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
-
-[node name="Kamera" type="Camera2D" parent="Hráč"]
-current = true
-script = ExtResource( 6 )
-
-[node name="Zvuk" type="AudioStreamPlayer2D" parent="Hráč"]
-
-[node name="Smrt" type="Timer" parent="Hráč"]
-wait_time = 0.9
 
 [node name="Mapa" type="Node2D" parent="."]
 
@@ -237,11 +220,81 @@ polygon = PoolVector2Array( 13312, -2112, 13312, -3008, 13440, -3008, 13440, -21
 visible = false
 polygon = PoolVector2Array( 5152, 800, 8512, 704, 8504, 1272, 9024, 1288, 9032, 1664, 8672, 2072, 8008, 2096, 7392, 1528, 7168, 1512, 6728, 1720, 5928, 1704, 5184, 1248 )
 
-[node name="WinKostka" parent="." instance=ExtResource( 8 )]
+[node name="WinKostka" parent="Mapa" instance=ExtResource( 8 )]
 position = Vector2( 5120, 1024 )
 scale = Vector2( 2, 1 )
 
-[connection signal="timeout" from="Hráč/Smrt" to="Hráč" method="die"]
+[node name="CheckpointMapa" type="TileMap" parent="Mapa"]
+tile_set = ExtResource( 14 )
+format = 1
+script = ExtResource( 13 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Easy" type="TileMap" parent="Mapa/CheckpointMapa"]
+visible = false
+tile_set = ExtResource( 14 )
+format = 1
+tile_data = PoolIntArray( -65529, 0, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Normal" type="TileMap" parent="Mapa/CheckpointMapa"]
+visible = false
+tile_set = ExtResource( 14 )
+format = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Hard" type="TileMap" parent="Mapa/CheckpointMapa"]
+tile_set = ExtResource( 14 )
+format = 1
+tile_data = PoolIntArray( -3931944, 0, 0, -3866408, 0, 0, -3800872, 0, 0, -3735336, 0, 0, -3669800, 0, 0, -2555778, 0, 0, -2490242, 0, 0, -2424706, 0, 0, -2359170, 0, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Hráč" type="KinematicBody2D" parent="."]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Obrázek" type="Polygon2D" parent="Hráč"]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( -32, -32, -32, 32, 32, 32, 32, -32 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Hráč"]
+polygon = PoolVector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+
+[node name="Kamera" type="Camera2D" parent="Hráč"]
+current = true
+script = ExtResource( 6 )
+
+[node name="Smrt" type="Timer" parent="Hráč"]
+wait_time = 0.9
+
+[node name="Buttons" type="CanvasLayer" parent="."]
+
+[node name="Left" type="TouchScreenButton" parent="Buttons"]
+position = Vector2( 0, 534 )
+normal = ExtResource( 9 )
+action = "ui_left"
+
+[node name="Right" type="TouchScreenButton" parent="Buttons"]
+position = Vector2( 100, 534 )
+normal = ExtResource( 10 )
+action = "ui_right"
+
+[node name="Up" type="TouchScreenButton" parent="Buttons"]
+position = Vector2( 958, 534 )
+normal = ExtResource( 11 )
+action = "ui_up"
+script = ExtResource( 12 )
+
 [connection signal="body_entered" from="Mapa/CameraZoomAreas/Area1" to="Mapa/CameraZoomAreas" method="zoom" binds= [ Vector2( 2, 2 ), true ]]
 [connection signal="body_exited" from="Mapa/CameraZoomAreas/Area1" to="Mapa/CameraZoomAreas" method="end_zoom"]
 [connection signal="body_entered" from="Mapa/CameraZoomAreas/Area2" to="Mapa/CameraZoomAreas" method="zoom" binds= [ Vector2( 1, 0.9 ), true ]]
@@ -260,3 +313,4 @@ scale = Vector2( 2, 1 )
 [connection signal="body_exited" from="Mapa/CameraZoomAreas/Area8" to="Mapa/CameraZoomAreas" method="end_zoom"]
 [connection signal="body_entered" from="Mapa/CameraZoomAreas/Area9" to="Mapa/CameraZoomAreas" method="zoom" binds= [ Vector2( -1, 1 ), false ]]
 [connection signal="body_exited" from="Mapa/CameraZoomAreas/Area9" to="Mapa/CameraZoomAreas" method="end_zoom"]
+[connection signal="timeout" from="Hráč/Smrt" to="Hráč" method="die"]

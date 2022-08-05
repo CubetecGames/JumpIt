@@ -1,7 +1,7 @@
 extends Sprite
 
 var timer = null
-const time = 0.5
+var time
 
 func destroy(body):
 	if body.name == "Hráč":
@@ -13,3 +13,9 @@ func _process(delta):
 		$Label.text = str(round((time - timer) * 100) / 100)
 		if timer > time:
 			queue_free()
+
+func _ready():
+	if Difficulty.get_difficulty() == "Hard":
+		time = 0.05
+	else:
+		time = 0.5

@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://VersionList.gd" type="Script" id=1]
+[ext_resource path="res://Assets/static/RobotoSlab-Black.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.180392, 0.180392, 0.180392, 1 )
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 600.0
+margin_bottom = 600.0
+custom_fonts/font = SubResource( 1 )
+text = "v1.1.0:
+-Mobile Support
+-3 new difficulties
+-Added version list
+-From now, you can also jump with the spacebar
+
+v1.0.0
+-Game released"
+align = 1
+script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Timer" to="Label" method="change_back"]

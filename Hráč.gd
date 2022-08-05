@@ -9,25 +9,24 @@ var ground = false
 var die = false
 const gravity_force = 1.2
 const walljump_force = 5
+var up_button
 
+func _ready():
+	position = Difficulty.spawn_point
+	up_button = $"../Buttons/Up"
+	
 func _physics_process(delta):
 	if die:
 		return 
 	if Input.is_action_pressed("ui_left"):
-		velocity.x -= speed
+		left()
 	if Input.is_action_pressed("ui_right"):
-		velocity.x += speed
+		right()
 	if Input.is_action_pressed("ui_up"):
 		if ground:
-			velocity.y -= jump
-			play_sound(load("res://Assets/Zvuky/Jump.mp3"))
-		elif walljump():
-			velocity.y = jump * - 1 * walljump_force / 4
-			if velocity.x >= 0:
-				velocity.x = jump * - 1 * walljump_force
-			elif velocity.x <= 0:
-				velocity.x = jump * walljump_force
-			play_sound(load("res://Assets/Zvuky/Basketball Bounce.mp3"))
+			jump()
+		if walljump_test():
+			walljump()
 	
 	velocity.x *= 0.8
 	gravity += gravity_force
@@ -51,14 +50,20 @@ func _physics_process(delta):
 		var object = get_slide_collision(id).collider.name
 		if object == "LávaMapa":
 			lava()
+			
+	if ground:
+		up_button.set_button(0)
+	elif walljump_test():
+		up_button.set_button(1)
 
 
 func die():
 	get_tree().change_scene("res://hra.tscn")
 
 func play_sound(file):
-	$Zvuk.stream = file
-	$Zvuk.play()
+	var sound = load("res://Sound.gd").new()
+	sound.stream = file
+	add_child(sound)
 	
 func fall():
 	die = true
@@ -72,14 +77,29 @@ func lava():
 	play_sound(load("res://Assets/Zvuky/Rip.mp3"))
 	$Smrt.start()
 
-func walljump():
+func walljump_test():
 	for id in range(get_slide_count()):
-		var object = get_slide_collision(id).collider.name
-		if object == "KameníMapa":
+		var object = get_slide_collision(id).collider
+		if object and object.name == "KameníMapa":
 			if is_on_wall() and not is_on_floor():
 				return true
 	return false
-	
 func bounce():
 	gravity = 0
 	velocity.y = jump * - 2
+	
+func left():
+	velocity.x -= speed
+func right():
+	velocity.x += speed
+func jump():
+	velocity.y -= jump
+	play_sound(load("res://Assets/Zvuky/Jump.mp3"))
+	
+func walljump():
+	velocity.y = jump * - 1 * walljump_force / 4
+	if velocity.x >= 0:
+		velocity.x = jump * - 1 * walljump_force
+	elif velocity.x <= 0:
+		velocity.x = jump * walljump_force
+	play_sound(load("res://Assets/Zvuky/Basketball Bounce.mp3"))
